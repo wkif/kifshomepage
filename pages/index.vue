@@ -23,9 +23,7 @@
           <img h-5rem m-t-6rem src="../public/logo.png" alt="logo" />
         </div>
         <!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
-        <p id="hitokoto">
-          <a id="hitokoto_text" text-14px>:D 获取中...</a>
-        </p>
+        <p id="hitokoto_text">:D 获取中...</p>
         <div shadow p-b-20px w="100%" rounded-20px>
           <div flex flex-justify-center m-t-3rem items-center w="100%">
             <div h-2rem @click="changeEnginList">
