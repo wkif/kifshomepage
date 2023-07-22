@@ -1,6 +1,6 @@
 <template>
   <div id="kifshomepage" p-t-3rem>
-    <div h-30vh>
+    <div id="topBox">
       <div w="100%" flex flex-justify-around items-center>
         <div flex flex-justify-around flex-row w="30%">
           <div class="nav" v-for="nav in navData" :key="nav.id">
@@ -165,7 +165,7 @@
         </div>
       </div>
     </div>
-    <div m-l-7vw m-r-7vw m-t-2vh h-60vh overflow-auto>
+    <div m-l-7vw m-r-7vw m-t-2vh overflow-auto :style="getStyle()">
       <div v-for="item in webList" :key="item.type">
         <div v-if="item.list.length">
           <div text-20px p-10px flex text="#8c959f" class="tracking-in-expand">
@@ -216,7 +216,15 @@
 </template>
 <script lang="ts" setup>
 import { data } from "./data.ts";
-
+const getStyle = () => {
+  // 获取 topBox 的高度
+  const topBox = document.getElementById("topBox");
+  // 计算剩下高度的vh
+  const height =
+    (window.innerHeight - topBox?.offsetHeight - 200) / window.innerHeight;
+  // 返回style
+  return `height: ${height * 100}vh;`;
+};
 const navData = [
   {
     id: 0,

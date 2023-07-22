@@ -1,6 +1,56 @@
+<script lang="ts" setup>
+import Plum from "./composables/Plum";
+const el = ref<HTMLCanvasElement>();
+const el2 = ref<HTMLCanvasElement>();
+function initFlower() {
+  // const canvas = el.value!
+
+  const canvasList = [];
+  canvasList.push(el.value!);
+  canvasList.push(el2.value!);
+  const branchList = [
+    {
+      start: {
+        x: 0,
+        y: Math.random() * 600,
+      },
+      length: Math.random() * 10,
+      theta: -Math.PI / 2 + Math.random() * 10,
+    },
+    {
+      start: {
+        x: 1900,
+        y: Math.random() * 600,
+      },
+      length: Math.random() * 10,
+      theta: -Math.PI / 2 + Math.random() * 10,
+    },
+  ];
+  canvasList.forEach((canvas, index) => {
+    canvas.width = window.innerWidth - 20;
+    canvas.height = window.innerHeight;
+    const plum = new Plum(canvas);
+    const branch = branchList[index];
+    plum.startPlum(branch);
+  });
+}
+function init() {
+  setTimeout(() => {
+    initFlower();
+  }, 1000);
+}
+
+onMounted(() => {
+  init();
+});
+</script>
+
 <template>
   <div class="dark:bg-gray-800 text-gray-800 dark:text-gray-100" min-h-100vh>
-    <!-- <NuxtWelcome /> -->
+    <div class="z--1 absolute w-screen h-screen">
+      <canvas id="el" ref="el" class="absolute"></canvas>
+      <canvas id="el2" ref="el2" class="absolute"></canvas>
+    </div>
     <NuxtPage />
   </div>
 </template>
