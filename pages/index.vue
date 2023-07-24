@@ -193,6 +193,7 @@ onUnmounted(() => {
         <p id="hitokoto_text" @contextmenu.prevent.stop="getMessage">
           :D 获取中...
         </p>
+        <!-- <span id="jinrishici-sentence">正在加载今日诗词....</span> -->
         <div shadow p-b-20px w="100%" rounded-20px>
           <div flex flex-justify-center m-t-3rem items-center w="100%">
             <div h-2rem @click="changeEnginList">

@@ -21,4 +21,11 @@ export default defineNuxtConfig({
       }]
     ],
   },
+  // app: {
+  //   head: {
+  //     script: [
+  //       "https://sdk.jinrishici.com/v2/browser/jinrishici.js"
+  //     ]
+  //   }
+  // }
 });
