@@ -1,3 +1,123 @@
+<script lang="ts" setup>
+import { data } from "./data.ts";
+const getStyle = () => {
+  if (process.client) {
+    // 获取 topBox 的高度
+    const topBox = document.getElementById("topBox");
+    // 计算剩下高度的vh
+    const height =
+      (window.innerHeight - topBox?.offsetHeight - 200) / window.innerHeight;
+    // 返回style
+    const content = document.getElementById("content");
+    content.style.cssText = `height: ${height * 100}vh;`;
+  }
+};
+const navData = [
+  {
+    id: 0,
+    name: "首页",
+    link: "/",
+  },
+  {
+    id: 1,
+    name: "github",
+    link: "https://github.com/wkif",
+  },
+  {
+    id: 2,
+    name: "博客（hexo版本）",
+    link: "https://www.kifroom.icu/",
+  },
+  {
+    id: 3,
+    name: "博客（Nuxt3版本）",
+    link: "https://kifroom-nuxt.vercel.app/",
+  },
+];
+// 搜索引擎
+const searchEngine = [
+  {
+    id: 0,
+    name: "必应",
+    link: "https://cn.bing.com/search?q=",
+    icon: "https://files.codelife.cc/itab/search/bing.svg",
+  },
+  {
+    id: 1,
+    name: "谷歌",
+    link: "https://www.google.com/search?q=",
+    icon: "https://files.codelife.cc/itab/search/google.svg",
+  },
+  {
+    id: 2,
+    name: "百度",
+    link: "https://www.baidu.com/s?wd=",
+    icon: "https://files.codelife.cc/itab/search/baidu.svg",
+  },
+];
+const webList = ref(data);
+const searchEngineIndex = ref(0);
+const historyshow = ref(false);
+let searchEngineIcon = searchEngine[searchEngineIndex.value].icon;
+const searchEngineListShow = ref(false);
+const changeEnginList = () => {
+  searchEngineListShow.value = !searchEngineListShow.value;
+};
+const changeEngin = (id: number) => {
+  searchEngineIndex.value = id;
+  searchEngineIcon = searchEngine[searchEngineIndex.value].icon;
+  searchEngineListShow.value = false;
+};
+let searchValue = ref("");
+const search = () => {
+  if (!searchValue.value) return;
+  if (history.value.length > 10) history.value.shift();
+  if (history.value.find((item) => item === searchValue.value)) {
+  } else {
+    history.value.push(searchValue.value);
+  }
+  window.open(searchEngine[searchEngineIndex.value].link + searchValue.value);
+};
+const clear = () => {
+  searchValue.value = "";
+};
+const history = ref<string[]>([]);
+const getHistory = () => {
+  const historyData = localStorage.getItem("history");
+  if (historyData) {
+    history.value = JSON.parse(historyData);
+  }
+};
+const getMessage = async () => {
+  // 请注意此 Web API 的兼容性，
+  // 不支持 IE, iOS Safari < 10.1，
+  // 完整支持列表参考：https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+  fetch("https://v1.hitokoto.cn")
+    .then((response) => response.json())
+    .then((data) => {
+      if (process.client) {
+        const hitokoto = document.querySelector("#hitokoto_text");
+        hitokoto.innerText = data.hitokoto;
+      }
+    })
+    .catch(console.error);
+};
+const remove = (index: number) => {
+  history.value.splice(index, 1);
+};
+const open = (link: string) => {
+  window.open(link);
+};
+onMounted(() => {
+  getHistory();
+  getMessage();
+  getStyle()
+});
+onUnmounted(() => {
+  localStorage.setItem("history", JSON.stringify(history.value));
+});
+</script>
+
 <template>
   <div id="kifshomepage" p-t-3rem>
     <div id="topBox">
@@ -165,7 +285,7 @@
         </div>
       </div>
     </div>
-    <div m-l-7vw m-r-7vw m-t-2vh overflow-auto :style="getStyle()">
+    <div m-l-7vw m-r-7vw m-t-2vh overflow-auto id="content">
       <div v-for="item in webList" :key="item.type">
         <div v-if="item.list.length">
           <div text-20px p-10px flex text="#8c959f" class="tracking-in-expand">
@@ -214,116 +334,3 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
-import { data } from "./data.ts";
-const getStyle = () => {
-  // 获取 topBox 的高度
-  const topBox = document.getElementById("topBox");
-  // 计算剩下高度的vh
-  const height =
-    (window.innerHeight - topBox?.offsetHeight - 200) / window.innerHeight;
-  // 返回style
-  return `height: ${height * 100}vh;`;
-};
-const navData = [
-  {
-    id: 0,
-    name: "首页",
-    link: "/",
-  },
-  {
-    id: 1,
-    name: "github",
-    link: "https://github.com/wkif",
-  },
-  {
-    id: 2,
-    name: "博客（hexo版本）",
-    link: "https://www.kifroom.icu/",
-  },
-  {
-    id: 3,
-    name: "博客（Nuxt3版本）",
-    link: "https://kifroom-nuxt.vercel.app/",
-  },
-];
-// 搜索引擎
-const searchEngine = [
-  {
-    id: 0,
-    name: "必应",
-    link: "https://cn.bing.com/search?q=",
-    icon: "https://files.codelife.cc/itab/search/bing.svg",
-  },
-  {
-    id: 1,
-    name: "谷歌",
-    link: "https://www.google.com/search?q=",
-    icon: "https://files.codelife.cc/itab/search/google.svg",
-  },
-  {
-    id: 2,
-    name: "百度",
-    link: "https://www.baidu.com/s?wd=",
-    icon: "https://files.codelife.cc/itab/search/baidu.svg",
-  },
-];
-const webList = ref(data);
-const searchEngineIndex = ref(0);
-const historyshow = ref(false);
-let searchEngineIcon = searchEngine[searchEngineIndex.value].icon;
-const searchEngineListShow = ref(false);
-const changeEnginList = () => {
-  searchEngineListShow.value = !searchEngineListShow.value;
-};
-const changeEngin = (id: number) => {
-  searchEngineIndex.value = id;
-  searchEngineIcon = searchEngine[searchEngineIndex.value].icon;
-  searchEngineListShow.value = false;
-};
-let searchValue = ref("");
-const search = () => {
-  if (!searchValue.value) return;
-  if (history.value.length > 10) history.value.shift();
-  if (history.value.find((item) => item === searchValue.value)) {
-  } else {
-    history.value.push(searchValue.value);
-  }
-  window.open(searchEngine[searchEngineIndex.value].link + searchValue.value);
-};
-const clear = () => {
-  searchValue.value = "";
-};
-const history = ref<string[]>([]);
-const getHistory = () => {
-  const historyData = localStorage.getItem("history");
-  if (historyData) {
-    history.value = JSON.parse(historyData);
-  }
-};
-const getMessage = async () => {
-  // 请注意此 Web API 的兼容性，
-  // 不支持 IE, iOS Safari < 10.1，
-  // 完整支持列表参考：https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-  fetch("https://v1.hitokoto.cn")
-    .then((response) => response.json())
-    .then((data) => {
-      const hitokoto = document.querySelector("#hitokoto_text");
-      hitokoto.innerText = data.hitokoto;
-    })
-    .catch(console.error);
-};
-const remove = (index: number) => {
-  history.value.splice(index, 1);
-};
-const open = (link: string) => {
-  window.open(link);
-};
-onMounted(() => {
-  getHistory();
-  getMessage();
-});
-onUnmounted(() => {
-  localStorage.setItem("history", JSON.stringify(history.value));
-});
-</script>
