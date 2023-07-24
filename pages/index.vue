@@ -159,7 +159,7 @@ onMounted(() => {
   getHistory();
   getMessage();
   getStyle();
-  // init();
+  init();
 });
 onUnmounted(() => {
   localStorage.setItem("history", JSON.stringify(history.value));
@@ -221,7 +221,6 @@ onUnmounted(() => {
                 v-model="searchValue"
                 @keyup.enter="search"
                 @onkeydown="search"
-                @input="searchSuggest(searchValue)"
                 required
                 border-rd-1
                 shadow-sm
