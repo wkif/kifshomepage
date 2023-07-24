@@ -20,17 +20,17 @@ const navData = [
   },
   {
     id: 1,
-    name: "github",
+    name: "Github",
     link: "https://github.com/wkif",
   },
   {
     id: 2,
-    name: "博客（hexo版本）",
+    name: "博客（hexo版）",
     link: "https://www.kifroom.icu/",
   },
   {
     id: 3,
-    name: "博客（Nuxt3版本）",
+    name: "博客（Nuxt3版）",
     link: "https://kifroom-nuxt.vercel.app/",
   },
 ];
@@ -108,10 +108,58 @@ const remove = (index: number) => {
 const open = (link: string) => {
   window.open(link);
 };
+const init = () => {
+  if (process.client) {
+    // 禁用右键
+    document.oncontextmenu = new Function("event.returnValue=false");
+    // 禁用选择
+    document.onselectstart = new Function("event.returnValue=false");
+    //禁止f12
+    document.οnkeydοwn = new Function("event.returnValue=false");
+    document.onkeydown = function (e) {
+      if (e && e.keyCode === 123) {
+        e.returnValue = false;
+        // e.keyCode = 0   //去掉也可以的，倘若要写，则需要setter 以及 getter配合使用，不配合，会报错
+        return false;
+      }
+    };
+  }
+};
+// 搜索联想
+const searchSuggest = (e: string) => {
+  // 防抖
+  let timer: any = null;
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    if (e) {
+      fetch(
+        `
+https://cn.bing.com/AS/Suggestions?pt=page.serp&mkt=zh-cn&ds=mobileweb&qry=${e}&cp=5&msbqf=false&cvid=4FCA7DA4E45F420DAB1279FD0E7EAD5B`,
+        {
+          header: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch(console.error);
+      // const res = useFetch(
+      //   `https://sg1.api.bing.com/qsonhs.aspx?type=cb&cb=callback&q=${e}`
+      // );
+      // console.log(res);
+    }
+  }, 1000);
+};
 onMounted(() => {
   getHistory();
   getMessage();
-  getStyle()
+  getStyle();
+  // init();
 });
 onUnmounted(() => {
   localStorage.setItem("history", JSON.stringify(history.value));
@@ -142,8 +190,9 @@ onUnmounted(() => {
         <div w="100%" flex flex-justify-center class="bounce-top flicker-1">
           <img h-5rem m-t-6rem src="../public/logo.png" alt="logo" />
         </div>
-        <!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
-        <p id="hitokoto_text">:D 获取中...</p>
+        <p id="hitokoto_text" @contextmenu.prevent.stop="getMessage">
+          :D 获取中...
+        </p>
         <div shadow p-b-20px w="100%" rounded-20px>
           <div flex flex-justify-center m-t-3rem items-center w="100%">
             <div h-2rem @click="changeEnginList">
@@ -172,6 +221,7 @@ onUnmounted(() => {
                 v-model="searchValue"
                 @keyup.enter="search"
                 @onkeydown="search"
+                @input="searchSuggest(searchValue)"
                 required
                 border-rd-1
                 shadow-sm
@@ -331,6 +381,12 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
+    </div>
+    <div h="100%" text="center #c7c7c7" p-2rem>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+        CC BY-NC-SA 4.0</a
+      >
+      <a href="https://www.kifroom.icu" m-l-1rem>kif</a>
     </div>
   </div>
 </template>

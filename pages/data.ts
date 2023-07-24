@@ -5,14 +5,14 @@ const data = [
     list: [
       {
         id: 0,
-        name: "kifs print online",
+        name: "Kifs print online",
         link: "https://print.kifroom.icu/",
         desc: "个开源的虚拟手绘风格的白板。创建任何漂亮的手绘图。",
         tags: ["白板", "在线工具", "自部署"]
       },
       {
         id: 1,
-        name: "animista",
+        name: "Animista",
         link: "https://animista.net/",
         desc: "CSS动画生成器",
         tags: ["动画", "在线工具"]
@@ -41,7 +41,7 @@ const data = [
       },
       {
         id: 5,
-        name: "remove Bg",
+        name: "Remove Bg",
         link: "https://www.remove.bg/zh",
         desc: "在线抠图",
         tags: ["抠图", "在线工具"]
@@ -55,21 +55,21 @@ const data = [
       },
       {
         id: 7,
-        name: "grabient",
+        name: "Grabient",
         link: "https://www.grabient.com/",
         desc: "CSS渐变库",
         tags: ["渐变"]
       },
       {
         id: 8,
-        name: "recoded",
+        name: "Recoded",
         link: "https://recoded.netlify.app/",
         desc: "为程序开发人员的代码界面生成器",
         tags: ["代码"]
       },
       {
         id: 9,
-        name: "iconfont",
+        name: "Iconfont",
         link: "https://www.iconfont.cn/",
         desc: "阿里巴巴矢量图标库",
         tags: ["图标"]
@@ -90,9 +90,9 @@ const data = [
       },
       {
         id: 12,
-        name: "l63邮箱",
+        name: "163邮箱",
         link: "https://mail.163.com/",
-        desc: "l63邮箱",
+        desc: "163邮箱",
         tags: ["邮箱"]
       }
     ]
@@ -156,7 +156,7 @@ const data = [
       },
       {
         id: 7,
-        name: "icones",
+        name: "Icones",
         link: "https://icones.js.org/",
         desc: "图标库",
         tags: ["图标"]
@@ -295,7 +295,7 @@ const data = [
       },
       {
         id: 8,
-        name: "tim",
+        name: "Tim",
         link: "https://tim.qq.com/",
         desc: "tim",
         tags: ["通讯"]
@@ -379,7 +379,7 @@ const data = [
       },
       {
         id: 4,
-        name: "vercel",
+        name: "Vercel",
         link: "https://vercel.com/",
         desc: "前端部署平台",
         tags: ["部署"]
