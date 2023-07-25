@@ -40,8 +40,7 @@ onMounted(() => {
   getStyle();
   // init();
 });
-const res = await $fetch("/api/hello");
-console.log("data1", res);
+
 </script>
 
 <template>

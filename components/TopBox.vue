@@ -86,11 +86,31 @@ const getHistory = () => {
     history.value = JSON.parse(historyData);
   }
 };
+const bg = ref("");
+const getImg = async () => {
+  const res = await $fetch("/api/hello");
+  if (res.code === 0) {
+    bg.value = res.data;
+    if (process.client) {
+      const topBox = document.getElementById("topBox");
+      // 修改背景图片
+      topBox.style.cssText = `background-image: url(${bg.value});`;
+    }
+  } else {
+    if (process.client) {
+      const topBox = document.getElementById("topBox");
+      // 修改背景图片
+      topBox.style.cssText = `background-image: url(https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN);`;
+    }
+  }
+};
 onMounted(() => {
   getHistory();
   getMessage();
   // init();
+  getImg();
 });
+
 onUnmounted(() => {
   localStorage.setItem("history", JSON.stringify(history.value));
 });
@@ -107,7 +127,19 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
-      <Darkmode cursor-pointer />
+      <div flex>
+        <!-- 刷新图标 -->
+        <div
+          class="i-mdi-refresh text-gray-800 dark:bg-#32383f bg-#eaeef2 dark:text-gray-100"
+          text-2xl
+          h-2rem
+          m-l-1rem
+          m-r-1rem
+          cursor-pointer
+          @click="getImg"
+        ></div>
+        <Darkmode cursor-pointer />
+      </div>
     </div>
     <div flex flex-col items-center>
       <div w="100%" flex flex-justify-center class="bounce-top flicker-1">
