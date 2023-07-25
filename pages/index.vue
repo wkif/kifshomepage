@@ -115,6 +115,7 @@ onMounted(() => {
       </div>
     </div>
     <!-- <Chatgpt /> -->
+    <User/>
     <Footer />
   </div>
 </template>

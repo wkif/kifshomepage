@@ -63,6 +63,11 @@ const searchEngineListShow = ref(false);
 const changeEnginList = () => {
   searchEngineListShow.value = !searchEngineListShow.value;
 };
+const changeEngin = (e) => {
+  searchEngineIndex.value = e;
+  searchEngineIcon = searchEngine[searchEngineIndex.value].icon;
+  searchEngineListShow.value = false;
+};
 let searchValue = ref("");
 const search = () => {
   if (!searchValue.value) return;

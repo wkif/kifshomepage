@@ -115,6 +115,20 @@ const data = [
         home: "https://mail.google.com/",
         desc: "Gmail",
         tags: ["邮箱"]
+      },
+      {
+        id: 16,
+        name: "微信公众平台",
+        home: "https://mp.weixin.qq.com/",
+        desc: "微信公众平台",
+        tags: ["微信"]
+      },
+      {
+        id: 17,
+        name: "blobanimation",
+        home: "https://blobanimation.com/",
+        desc: "blobanimation",
+        tags: ["动画"]
       }
     ]
   },
@@ -361,6 +375,13 @@ const data = [
         home: "https://meeting.tencent.com/",
         desc: "腾讯会议",
         tags: ["通讯"]
+      },
+      {
+        id: 11,
+        name: "snapcraft",
+        home: "https://snapcraft.io/",
+        desc: "snapcraft",
+        
       }
     ]
   },
