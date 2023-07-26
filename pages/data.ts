@@ -129,6 +129,13 @@ const data = [
         home: "https://blobanimation.com/",
         desc: "blobanimation",
         tags: ["动画"]
+      },
+      {
+        id: 18,
+        name: "Wakatime",
+        home: "https://wakatime.com/",
+        desc: "Wakatime",
+        tags: ["统计"]
       }
     ]
   },
