@@ -125,7 +125,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div id="topBox" bg-img class="shadow">
+  <div id="topBox" bg-img rounded-b-20px class="shadow">
     <div w="100%" flex flex-justify-around items-center p-t-2rem>
       <div flex flex-justify-around flex-row w="30%">
         <div class="nav" v-for="nav in navData" :key="nav.id">
