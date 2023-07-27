@@ -78,6 +78,9 @@ const search = () => {
   }
   window.open(searchEngine[searchEngineIndex.value].link + searchValue.value);
 };
+const open = (e)=>{
+  window.open(e);
+};
 const clear = () => {
   searchValue.value = "";
 };

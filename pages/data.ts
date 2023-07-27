@@ -136,7 +136,7 @@ const data = [
         home: "https://wakatime.com/",
         desc: "Wakatime",
         tags: ["统计"]
-      }
+      },
     ]
   },
   {
@@ -388,7 +388,7 @@ const data = [
         name: "snapcraft",
         home: "https://snapcraft.io/",
         desc: "snapcraft",
-        
+
       }
     ]
   },
