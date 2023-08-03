@@ -546,6 +546,83 @@ const data = [
         name: "Reactjs",
         home: "https://react.docschina.org/",
         desc: "用于构建用户界面的 JavaScript 库"
+      },
+      {
+        id: 1,
+        name: "React Router",
+        home: "https://reacttraining.com/react-router/web/guides/quick-start",
+        desc: "React 路由",
+        tags: ["路由"]
+      },
+      {
+        id: 2,
+        name: "Redux",
+        home: "https://redux.js.org/",
+        desc: "Redux",
+        tags: ["状态管理"]
+      },
+      {
+        id: 3,
+        name: "Mobx",
+        home: "https://cn.mobx.js.org/",
+        desc: "Mobx",
+        tags: ["状态管理"]
+      },
+      {
+        id: 4,
+        name: "Moti",
+        home: "https://moti.fyi/",
+        desc: "Moti",
+        tags: ["动画"]
+      },
+      {
+        id: 5,
+        name: "React Native",
+        home: "https://reactnative.cn/",
+        desc: "React Native",
+        tags: ["移动端"]
+      },
+      {
+        id: 6,
+        name: "Expo",
+        home: "https://docs.expo.dev/index.html",
+        desc: "Expo",
+        tags: ["移动端"]
+      },
+      {
+        id: 7,
+        name: "React Native Web",
+        home: "https://necolas.github.io/react-native-web/docs/?path=/docs/components-pressable--pressable",
+        desc: "React Native Web",
+        tags: ["移动端"]
+      },
+      {
+        id: 8,
+        name: "React-navigation",
+        home: "https://reactnavigation.org/",
+        desc: "React-navigation",
+        tags: ["导航"]
+      },
+      {
+        id: 9,
+        name: "React Native Paper",
+        home: "https://callstack.github.io/react-native-paper/",
+        desc: "React Native Paper",
+        tags: ["UI"]
+      },
+      {
+        id: 10,
+        name: "React Native Elements",
+        home: "https://reactnativeelements.com/",
+        desc: "React Native Elements",
+        tags: ["UI"]
+      },
+      {
+        id: 11,
+        name: "Rematch",
+        home: 'https://rematchjs.org/',
+        desc: 'Rematch is Redux best practices without the boilerplate. ',
+        tags: ['状态管理']
       }
     ]
   },
