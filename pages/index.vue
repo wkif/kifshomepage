@@ -38,7 +38,7 @@ const init = () => {
 
 onMounted(() => {
   getStyle();
-  init();
+  // init();
 });
 
 </script>
