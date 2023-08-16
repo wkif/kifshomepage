@@ -552,7 +552,8 @@ const data: WebType[] = [
         id: 0,
         name: "Reactjs",
         home: "https://react.docschina.org/",
-        desc: "用于构建用户界面的 JavaScript 库"
+        desc: "用于构建用户界面的 JavaScript 库",
+        tags: ["框架"],
       },
       {
         id: 1,
@@ -630,6 +631,49 @@ const data: WebType[] = [
         home: 'https://rematchjs.org/',
         desc: 'Rematch is Redux best practices without the boilerplate. ',
         tags: ['状态管理']
+      },
+      {
+        id: 12,
+        name: "React-three-fiber",
+        home: 'https://docs.pmnd.rs/react-three-fiber/getting-started/introduction',
+        desc: 'React-three-fiber',
+        tags: ['3D']
+      },
+      {
+        id: 13,
+        name: "Zustand",
+        home: 'https://docs.pmnd.rs/zustand/getting-started/introduction',
+        desc: 'Zustand',
+        tags: ['状态管理']
+      },
+      {
+        id: 14,
+        name: "React-spring",
+        home: 'https://react-spring.io/',
+        desc: 'React-spring',
+        tags: ['动画']
+      },
+      {
+        id: 15,
+        name: "React-use",
+        home: 'https://react-use.netlify.app/',
+        desc: 'React-use',
+        tags: ['工具库']
+      },
+      {
+        id: 16,
+        name: "Pmnd Docs",
+        home: 'https://docs.pmnd.rs/',
+        desc: 'Pmnd Docs',
+        tags: ['文档']
+      },
+      {
+        id: 17,
+        name: "async-storage",
+        home: 'https://react-native-async-storage.github.io/async-storage/',
+        github: 'https://github.com/react-native-async-storage/async-storage',
+        desc: 'async-storage',
+        tags: ['状态']
       }
     ]
   },
