@@ -50,7 +50,7 @@ const getMessage = async () => {
     .then((response) => response.json())
     .then((data) => {
       if (process.client) {
-        const hitokoto = document.querySelector("#hitokoto_text");
+        const hitokoto = document.querySelector("#hitokoto_text")!;
         hitokoto.innerText = data.hitokoto;
       }
     })
@@ -63,7 +63,7 @@ const searchEngineListShow = ref(false);
 const changeEnginList = () => {
   searchEngineListShow.value = !searchEngineListShow.value;
 };
-const changeEngin = (e) => {
+const changeEngin = (e: number) => {
   searchEngineIndex.value = e;
   searchEngineIcon = searchEngine[searchEngineIndex.value].icon;
   searchEngineListShow.value = false;
@@ -78,7 +78,7 @@ const search = () => {
   }
   window.open(searchEngine[searchEngineIndex.value].link + searchValue.value);
 };
-const open = (e)=>{
+const open = (e: string) => {
   window.open(e);
 };
 const clear = () => {
@@ -100,13 +100,13 @@ const getImg = async () => {
   if (res.code === 0) {
     bg.value = res.data;
     if (process.client) {
-      const topBox = document.getElementById("topBox");
+      const topBox = document.getElementById("topBox")!;
       // 修改背景图片
       topBox.style.cssText = `background-image: url(${bg.value});`;
     }
   } else {
     if (process.client) {
-      const topBox = document.getElementById("topBox");
+      const topBox = document.getElementById("topBox")!;
       // 修改背景图片
       topBox.style.cssText = `background-image: url(https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN);`;
     }
@@ -262,7 +262,7 @@ onUnmounted(() => {
           m-t-1rem
           absolute
           bg="#fafafa"
-          class="dark:bg-#32383f"
+          class="dark:bg-#32383f text-gray-800 dark:text-gray-100 w-30%"
           p-10px
           rounded-10px
         >
@@ -277,14 +277,18 @@ onUnmounted(() => {
             m-r-1rem
             cursor-pointer
             flex
+            text-truncate
           >
             <!-- 序号 -->
             <div text-20px m-r-2rem>{{ index + 1 }}.</div>
-            <a
+            <!-- <a
               :href="searchEngine[searchEngineIndex].link + item"
               target="_blank"
               >{{ item }}</a
-            >
+            > -->
+            <div @click="open(searchEngine[searchEngineIndex].link + item)">
+              {{ item }}
+            </div>
             <!-- 删除 -->
             <div
               class="i-mdi-close"

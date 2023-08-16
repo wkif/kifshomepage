@@ -1,4 +1,4 @@
-const data = [
+const data: WebType[] = [
   {
     type: "tools",
     name: "工具",
@@ -10,6 +10,13 @@ const data = [
         tags: ["白板", "在线工具", "自部署"],
         home: "https://print.kifroom.icu/",
         github: "https://github.com/wkif/ajietextd.github.io"
+      },
+      {
+        id: 19,
+        name: "excalidraw",
+        desc: "虚拟手绘风格的白板。创建任何漂亮的手绘图。",
+        tags: ["白板", "在线工具"],
+        home: "https://excalidraw.com/"
       },
       {
         id: 15,
@@ -675,12 +682,24 @@ const data = [
   {
     type: "game",
     name: "游戏",
-    list: []
   },
   {
     type: "other",
     name: "其他",
-    list: []
   }
 ]
+
+interface WebType {
+  type: string;
+  name: string;
+  list?: {
+    id: number;
+    name: string;
+    desc: string;
+    tags: string[];
+    home?: string;
+    github?: string;
+  }[];
+}
 export { data }
+export type { WebType }

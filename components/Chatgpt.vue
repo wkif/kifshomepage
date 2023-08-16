@@ -3,7 +3,7 @@ const show = ref(false);
 </script>
 
 <template>
-  <div fixed right-100px bottom-100px>
+  <div fixed right-100px bottom-300px>
     <div
       class="i-mdi-scoreboard-outline"
       border-radius-50%

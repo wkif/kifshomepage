@@ -1,19 +1,20 @@
 <script lang="ts" setup>
-import { data } from "./data.ts";
+import { data } from "./data";
+import type { WebType } from "./data";
 const getStyle = () => {
   if (process.client) {
     // 获取 topBox 的高度
-    const topBox = document.getElementById("topBox");
+    const topBox = document.getElementById("topBox")!;
     // 计算剩下高度的vh
     const height =
       (window.innerHeight - topBox?.offsetHeight - 200) / window.innerHeight;
     // 返回style
-    const content = document.getElementById("content");
+    const content = document.getElementById("content")!;
     content.style.cssText = `height: ${height * 100}vh;`;
   }
 };
 
-const webList = ref(data);
+const webList = ref<WebType[]>(data);
 
 const open = (link: string) => {
   window.open(link);
@@ -40,7 +41,6 @@ onMounted(() => {
   getStyle();
   // init();
 });
-
 </script>
 
 <template>
@@ -48,7 +48,7 @@ onMounted(() => {
     <TopBox />
     <div m-l-7vw m-r-7vw m-t-2vh overflow-auto id="content">
       <div v-for="item in webList" :key="item.type">
-        <div v-if="item.list.length">
+        <div v-if="item.list?.length">
           <div text-20px p-10px flex text="#8c959f" class="tracking-in-expand">
             {{ item.name }}
           </div>
@@ -115,7 +115,7 @@ onMounted(() => {
       </div>
     </div>
     <!-- <Chatgpt /> -->
-    <User/>
+    <User />
     <Footer />
   </div>
 </template>

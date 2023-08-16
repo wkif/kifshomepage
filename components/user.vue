@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { userinfo } from "../pages/config.ts";
+import { userinfo } from "../pages/config";
 const goto = () => {
   window.open(userinfo.link);
 };
