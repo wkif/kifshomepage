@@ -18,7 +18,7 @@ const navData = [
   {
     id: 3,
     name: "博客（Nuxt3版）",
-    link: "https://kifroom-nuxt.vercel.app/",
+    link: "https://blog.kifroom.icu/",
   },
 ];
 // 搜索引擎
