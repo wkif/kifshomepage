@@ -13,7 +13,7 @@ const navData = [
   {
     id: 2,
     name: "博客（hexo版）",
-    link: "https://www.kifroom.icu/",
+    link: "https://hexo.kifroom.icu/",
   },
   {
     id: 3,
