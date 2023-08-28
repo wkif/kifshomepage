@@ -538,7 +538,13 @@ const data: WebType[] = [
         home: "https://webpack.docschina.org/",
         desc: "Webpack",
         tags: ["打包"]
-
+      },
+      {
+        id: 19,
+        home: "https://www.netlify.com/",
+        name: "Netlify",
+        desc: "Netlify",
+        tags: ["部署"]
       }
 
     ]

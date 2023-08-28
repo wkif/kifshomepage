@@ -76,6 +76,7 @@ const search = () => {
   } else {
     history.value.push(searchValue.value);
   }
+  localStorage.setItem("history", JSON.stringify(history.value));
   window.open(searchEngine[searchEngineIndex.value].link + searchValue.value);
 };
 const open = (e: string) => {
@@ -83,6 +84,10 @@ const open = (e: string) => {
 };
 const clear = () => {
   searchValue.value = "";
+};
+const clearLocalStorage = () => {
+  localStorage.clear();
+  history.value = [];
 };
 const history = ref<string[]>([]);
 const remove = (index: number) => {
@@ -145,6 +150,16 @@ onUnmounted(() => {
           m-r-1rem
           cursor-pointer
           @click="getImg"
+        ></div>
+        <!-- 清除图标 -->
+        <div
+          class="i-mdi-delete text-gray-800 dark:bg-#32383f bg-#eaeef2 dark:text-gray-100"
+          text-2xl
+          h-2rem
+          m-l-1rem
+          m-r-1rem
+          cursor-pointer
+          @click="clearLocalStorage"
         ></div>
         <Darkmode cursor-pointer />
       </div>
@@ -255,6 +270,7 @@ onUnmounted(() => {
       <div relative w="100%" flex flex-col items-center>
         <div
           v-show="historyshow"
+          v-if="history.length"
           z-2
           flex
           flex-col
