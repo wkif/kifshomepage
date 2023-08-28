@@ -6,9 +6,9 @@ const getStyle = () => {
     // 获取 topBox 的高度
     const topBox = document.getElementById("topBox")!;
     // 计算剩下高度的vh
+    const body = document.body;
     const height =
-      (window.innerHeight - topBox?.offsetHeight - 200) / window.innerHeight;
-    // 返回style
+      (body.offsetHeight - topBox?.offsetHeight - 100) / body.offsetHeight;
     const content = document.getElementById("content")!;
     content.style.cssText = `height: ${height * 100}vh;`;
   }
