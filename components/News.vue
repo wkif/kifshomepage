@@ -99,7 +99,7 @@ onMounted(() => {
       w-30vw
       rounded-10px
       p-1rem
-      class="text-gray-800 dark:bg-#32383f bg-#eaeef2 dark:text-gray-100 shadow swing-in-top-fwd"
+      class="text-gray-800 dark:bg-#32383f bg-#eaeef2 dark:text-gray-100 shadow tilt-in-fwd-bl"
     >
       <div flex items-center justify-between>
         <div p-1rem color="red" flex items-center>
