@@ -25,7 +25,9 @@ export default defineNuxtConfig({
           "background-size": "100%",
           "background-repeat": "no-repeat",
         }
-      ]
+      ],
+      [/^transformX-([-?\.\d]+)$/, ([_, num]) => ({ transform: `translateX(${num}%)` })],
+      [/^transformY-([-?\.\d]+)$/, ([_, num]) => ({ transform: `translateY(${num}%)` })],
     ],
   },
 });
