@@ -309,6 +309,19 @@ const data: WebType[] = [
     ]
   },
   {
+    type: "Rust",
+    name: "Rust",
+    list: [
+      {
+        id: 0,
+        name: "Rust 程序设计语言 简体中文版",
+        home: "https://kaisery.github.io/trpl-zh-cn/",
+        desc: "Rust 程序设计语言 简体中文版",
+        tags: ["Rust"],
+      }
+    ]
+  },
+  {
     type: "software",
     name: "软件",
     list: [
