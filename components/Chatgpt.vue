@@ -7,7 +7,7 @@ const show = ref(false);
     <div
       v-show="show"
       min-h-40vh
-      w-30vw
+      w-40vw
       rounded-10px
       p-10px
       class="text-gray-800 dark:bg-#32383f bg-#eaeef2 dark:text-gray-100 shadow swing-in-top-fwd"
@@ -21,7 +21,7 @@ const show = ref(false);
         allowfullscreen="true"
         webkitallowfullscreen="true"
         mozallowfullscreen="true"
-        src="https://chat-gpt-next-web-kif.vercel.app/"
+        src="https://gpt.kifroom.icu/"
       ></iframe>
     </div>
     <div
