@@ -42,6 +42,10 @@ const searchEngine = [
     icon: "https://files.codelife.cc/itab/search/baidu.svg",
   },
 ];
+
+// 推荐数据
+const searchAssociationData = ref<string[]>([]);
+
 const getMessage = async () => {
   // 请注意此 Web API 的兼容性，
   // 不支持 IE, iOS Safari < 10.1，
@@ -78,6 +82,12 @@ const search = () => {
   }
   localStorage.setItem("history", JSON.stringify(history.value));
   window.open(searchEngine[searchEngineIndex.value].link + searchValue.value);
+};
+const getSearchData = async (val: string) => {
+  const { code, data } = await $fetch(`/api/searchAssociation?keyword=${val}`);
+  if (code === 200) {
+    searchAssociationData.value = data.slice(0, 9);
+  }
 };
 const open = (e: string) => {
   window.open(e);
@@ -117,11 +127,50 @@ const getImg = async () => {
     }
   }
 };
+
+const focusStateCount = ref(0);
+
+const keyDown = (e: KeyboardEvent) => {
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    if (focusStateCount.value < searchAssociationData.value.length - 1) {
+      focusStateCount.value++;
+    } else {
+      focusStateCount.value = 0;
+    }
+  }
+  if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (focusStateCount.value > 0) {
+      focusStateCount.value--;
+    } else {
+      focusStateCount.value = searchAssociationData.value.length - 1;
+    }
+  }
+  if (e.key === "Enter") {
+    if (focusStateCount.value) {
+      searchValue.value = searchAssociationData.value[focusStateCount.value];
+      search();
+    }
+  }
+};
+
+watch(
+  () => searchValue.value,
+  (val, old) => {
+    if (val !== "" && val !== old) {
+      getSearchData(val);
+    } else if (!val) {
+      searchAssociationData.value = [];
+    }
+  }
+);
+
 onMounted(() => {
   getHistory();
   getMessage();
-  // init();
   getImg();
+  addEventListener("keydown", keyDown); //创建监听键盘事件
 });
 
 onUnmounted(() => {
@@ -248,6 +297,46 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
+      <!-- 搜索联想 -->
+      <div relative w="100%" flex flex-col items-center>
+        <div
+          v-show="searchAssociationData.length"
+          z-2
+          flex
+          flex-col
+          flex-justify-center
+          m-t-1rem
+          absolute
+          bg="#fafafa"
+          class="dark:bg-#32383f text-gray-800 dark:text-gray-100 w-30%"
+          p-10px
+          rounded-10px
+        >
+          <div
+            v-for="(item, index) in searchAssociationData"
+            :key="item"
+            class="text-gray-800 dark:bg-#32383f bg-#eaeef2 dark:text-gray-100"
+            :class="
+              index === focusStateCount
+                ? 'text-red-800 dark:text-red-100 border-rd-1'
+                : ''
+            "
+            items-center
+            border-rd-1
+            p-rem
+            m-1rem
+            cursor-pointer
+            flex
+            text-truncate
+          >
+            <!-- 序号 -->
+            <div text-20px m-r-2rem>{{ index + 1 }}.</div>
+            <div @click="open(searchEngine[searchEngineIndex].link + item)">
+              {{ item }}
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- 下拉按钮 -->
       <div flex flex-justify-center items-center v-show="history.length">
         <div
@@ -269,7 +358,7 @@ onUnmounted(() => {
       </div>
       <div relative w="100%" flex flex-col items-center>
         <div
-          v-show="historyshow"
+          v-show="historyshow && searchAssociationData.length == 0"
           v-if="history.length"
           z-2
           flex

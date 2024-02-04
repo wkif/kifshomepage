@@ -1,5 +1,5 @@
 function isChrome() {
-  return navigator.userAgent.includes('Chrome')
+  return navigator.userAgent.includes("Chrome");
 }
 
-export { isChrome }
+export { isChrome };
