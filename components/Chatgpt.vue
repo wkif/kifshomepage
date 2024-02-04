@@ -26,7 +26,6 @@ const show = ref(false);
     </div>
     <div
       class="i-mdi-scoreboard-outline"
-      border-radius-50%
       text-2rem
       box-shadow="0 0 10px #000"
       cursor-pointer

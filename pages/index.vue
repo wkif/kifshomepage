@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { data } from "./data";
-import type { WebType } from "./data";
+import Plum from "../composables/Plum";
 const getStyle = () => {
   if (process.client) {
     // 获取 topBox 的高度
@@ -14,129 +13,154 @@ const getStyle = () => {
   }
 };
 
-const webList = ref<WebType[]>(data);
-const nameList = ref<string[]>([]);
-const getNameList = () => {
-  webList.value.forEach((item) => {
-    item.list?.length && nameList.value.push(item.name);
+const activeTab = ref(0);
+const TabList = ref([
+  {
+    name: "网站导航",
+    id: 0,
+  },
+  // {
+  //   name: "资讯信息",
+  //   id: 1,
+  // },
+]);
+
+const el = ref<HTMLCanvasElement>();
+const el2 = ref<HTMLCanvasElement>();
+function initFlower() {
+  // const canvas = el.value!
+
+  const canvasList = [];
+  canvasList.push(el.value!);
+  canvasList.push(el2.value!);
+  const branchList = [
+    {
+      start: {
+        x: 0,
+        y: Math.random() * 600,
+      },
+      length: Math.random() * 10,
+      theta: -Math.PI / 2 + Math.random() * 10,
+    },
+    {
+      start: {
+        x: 1900,
+        y: Math.random() * 600,
+      },
+      length: Math.random() * 10,
+      theta: -Math.PI / 2 + Math.random() * 10,
+    },
+  ];
+  canvasList.forEach((canvas, index) => {
+    canvas.width = window.innerWidth - 20;
+    canvas.height = window.innerHeight;
+    const plum = new Plum(canvas);
+    const branch = branchList[index];
+    plum.startPlum(branch);
   });
-};
-const open = (link: string) => {
-  window.open(link);
-};
-const init = () => {
-  if (process.client) {
-    // 禁用右键
-    document.oncontextmenu = new Function("event.returnValue=false");
-    // 禁用选择
-    document.onselectstart = new Function("event.returnValue=false");
-    //禁止f12
-    document.οnkeydοwn = new Function("event.returnValue=false");
-    document.onkeydown = function (e) {
-      if (e && e.keyCode === 123) {
-        e.returnValue = false;
-        // e.keyCode = 0   //去掉也可以的，倘若要写，则需要setter 以及 getter配合使用，不配合，会报错
-        return false;
-      }
-    };
-  }
-};
+}
+function init() {
+  setTimeout(() => {
+    initFlower();
+  }, 1000);
+}
 
 onMounted(() => {
   getStyle();
-  getNameList();
   // init();
 });
 </script>
 
 <template>
   <div id="kifshomepage">
+    <!-- <div class="z--1 absolute w-100% h-100%">
+      <canvas id="el" ref="el" class="absolute"></canvas>
+      <canvas id="el2" ref="el2" class="absolute"></canvas>
+    </div> -->
     <TopBox />
-    <div flex>
-      <div flex flex-col p-l-50px m-t-6vh>
-        <a v-for="item in nameList" :key="item" :href="'#' + item" p-8px>{{
-          item
-        }}</a>
-      </div>
-      <div m-l-7vw m-r-7vw m-t-2vh overflow-auto id="content">
-        <div v-for="item in webList" :key="item.type">
-          <div v-if="item.list?.length">
-            <div
-              text-20px
-              p-10px
-              flex
-              text="#8c959f"
-              :id="item.name"
-              class="tracking-in-expand"
-            >
-              {{ item.name }}
-            </div>
-            <div w-130px h-2px m-b-20px bg="#d7dadd"></div>
-          </div>
-
-          <div flex flex-wrap>
-            <div
-              v-for="web in item.list"
-              :key="web.name"
-              m-20px
-              p-20px
-              rounded-10px
-              w-200px
-              cursor-pointer
-              class="text-gray-800 dark:bg-#32383f bg-#eaeef2 dark:text-gray-100 slide-in-top"
-              flex
-              flex-col
-              justify-between
-            >
-              <div flex items-center justify-end>
-                <div
-                  v-for="tag in web.tags"
-                  :key="tag"
-                  text-10px
-                  p-4px
-                  m-4px
-                  bg="#a475f9"
-                  rounded-7px
-                >
-                  {{ tag }}
-                </div>
-              </div>
-              <div w="100%" h-1px m-1px bg="#a475f9"></div>
-              <!-- title -->
-              <div text-20px p-t-10px class="tracking-in-expand">
-                {{ web.name }}
-              </div>
-              <!-- desc -->
-              <div text-14px p-t-10px>{{ web.desc }}</div>
-              <div w="100%" h-1px m-t-2px bg="#a475f9"></div>
-              <div flex items-center justify-around>
-                <!-- home图标 -->
-                <div
-                  v-if="web.home"
-                  class="i-mdi-home"
-                  text-2xl
-                  h-2rem
-                  m-1px
-                  @click="open(web.home)"
-                ></div>
-                <!-- github图标 -->
-                <div
-                  v-if="web.github"
-                  class="i-mdi-github"
-                  text-2xl
-                  h-2rem
-                  m-1px
-                  @click="open(web.github)"
-                ></div>
-              </div>
-            </div>
-          </div>
+    <div id="content" overflow-auto>
+      <div
+        id="tabs"
+        class="responsive sticky-top"
+        absolute
+        bg-white
+        w-100vw
+        z-1
+      >
+        <div class="tabs tabs-center table">
+          <!-- <a
+            href="#web"
+            class="tab"
+            :class="activeTab === 'web' ? 'active' : ''"
+          >
+            网站导航
+          </a>
+          <a href="#news" class="tab"> 资讯信息 </a> -->
+          <a
+            class="tab"
+            :class="activeTab === tab.id ? 'active' : ''"
+            v-for="tab in TabList"
+            :key="tab.id"
+            @click="activeTab = tab.id"
+            >{{ tab.name }}</a
+          >
         </div>
       </div>
+      <ContentWebList v-show="activeTab === 0" />
+      <ContentNewList v-show="activeTab === 1" />
     </div>
-    <Chatgpt />
+    <Chatgpt z-2 />
     <User />
     <News />
     <Footer />
   </div>
 </template>
+<style lang="less" scoped>
+.tabs {
+  display: table;
+  border-collapse: separate;
+  table-layout: auto;
+  &.tabs-center {
+    margin: auto;
+  }
+  &.tabs-justify {
+    width: 100%;
+    table-layout: fixed;
+  }
+  a.tab {
+    position: relative;
+    display: table-cell;
+    transition: all ease 0.3s;
+    padding: 1em 1.6em;
+    transform: translate3d(0, 0, 0);
+    color: #636d84;
+    white-space: nowrap;
+    cursor: pointer;
+    &:hover {
+      color: rgb(60, 180, 250);
+    }
+    &:after {
+      transition: all 0.3s cubic-bezier(1, 0, 0, 1);
+      will-change: transform, box-shadow, opacity;
+      position: absolute;
+      content: "";
+      height: 3px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      border-radius: 3px 3px 0px 0px;
+      background: rgba(60, 180, 250, 0.2);
+      box-shadow: 0px 4px 10px 3px rgba(60, 180, 250, 0.15);
+      opacity: 0;
+      transform: scale(0, 1);
+    }
+    &.active {
+      color: rgb(60, 180, 250);
+      &:after {
+        opacity: 1;
+        transform: scale(1, 1);
+      }
+    }
+  }
+}
+</style>

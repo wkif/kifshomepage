@@ -54,7 +54,9 @@ const getMessage = async () => {
     .then((response) => response.json())
     .then((data) => {
       if (process.client) {
-        const hitokoto = document.querySelector("#hitokoto_text")!;
+        const hitokoto = document.querySelector(
+          "#hitokoto_text"
+        )! as HTMLElement;
         hitokoto.innerText = data.hitokoto;
       }
     })
@@ -179,7 +181,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div id="topBox" bg-img rounded-b-20px class="shadow">
+  <div id="topBox" bg-img rounded-b-20px text-white class="shadow">
     <div w="100%" flex flex-justify-around items-center p-t-2rem>
       <div flex flex-justify-around flex-row w="30%">
         <div class="nav" v-for="nav in navData" :key="nav.id">
@@ -215,7 +217,7 @@ onUnmounted(() => {
     </div>
     <div flex flex-col items-center>
       <div w="100%" flex flex-justify-center class="bounce-top flicker-1">
-        <img h-5rem m-t-6rem src="../public/logo.png" alt="logo" />
+        <img h-5rem m-t-2rem src="../public/logo.png" alt="logo" />
       </div>
       <p id="hitokoto_text" @contextmenu.prevent.stop="getMessage">
         :D 获取中...

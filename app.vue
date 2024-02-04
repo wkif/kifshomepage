@@ -1,56 +1,7 @@
-<script lang="ts" setup>
-import Plum from "./composables/Plum";
-const el = ref<HTMLCanvasElement>();
-const el2 = ref<HTMLCanvasElement>();
-function initFlower() {
-  // const canvas = el.value!
-
-  const canvasList = [];
-  canvasList.push(el.value!);
-  canvasList.push(el2.value!);
-  const branchList = [
-    {
-      start: {
-        x: 0,
-        y: Math.random() * 600,
-      },
-      length: Math.random() * 10,
-      theta: -Math.PI / 2 + Math.random() * 10,
-    },
-    {
-      start: {
-        x: 1900,
-        y: Math.random() * 600,
-      },
-      length: Math.random() * 10,
-      theta: -Math.PI / 2 + Math.random() * 10,
-    },
-  ];
-  canvasList.forEach((canvas, index) => {
-    canvas.width = window.innerWidth - 20;
-    canvas.height = window.innerHeight;
-    const plum = new Plum(canvas);
-    const branch = branchList[index];
-    plum.startPlum(branch);
-  });
-}
-function init() {
-  setTimeout(() => {
-    initFlower();
-  }, 1000);
-}
-
-onMounted(() => {
-  init();
-});
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="dark:bg-gray-800 text-gray-800 dark:text-gray-100" min-h-100vh>
-    <div class="z--1 absolute w-screen h-screen">
-      <canvas id="el" ref="el" class="absolute"></canvas>
-      <canvas id="el2" ref="el2" class="absolute"></canvas>
-    </div>
     <NuxtPage />
   </div>
 </template>
@@ -447,8 +398,9 @@ a:hover {
   }
 }
 .swing-in-top-fwd {
-	-webkit-animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
-	        animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+  -webkit-animation: swing-in-top-fwd 0.5s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
 /* ----------------------------------------------
@@ -466,39 +418,40 @@ a:hover {
 @-webkit-keyframes swing-in-top-fwd {
   0% {
     -webkit-transform: rotateX(-100deg);
-            transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
     opacity: 0;
   }
   100% {
     -webkit-transform: rotateX(0deg);
-            transform: rotateX(0deg);
+    transform: rotateX(0deg);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
     opacity: 1;
   }
 }
 @keyframes swing-in-top-fwd {
   0% {
     -webkit-transform: rotateX(-100deg);
-            transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
     opacity: 0;
   }
   100% {
     -webkit-transform: rotateX(0deg);
-            transform: rotateX(0deg);
+    transform: rotateX(0deg);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
     opacity: 1;
   }
 }
 
 .tilt-in-fwd-bl {
-	-webkit-animation: tilt-in-fwd-bl 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: tilt-in-fwd-bl 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: tilt-in-fwd-bl 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: tilt-in-fwd-bl 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 /* ----------------------------------------------
@@ -513,33 +466,39 @@ a:hover {
  * animation tilt-in-fwd-bl
  * ----------------------------------------
  */
- @-webkit-keyframes tilt-in-fwd-bl {
+@-webkit-keyframes tilt-in-fwd-bl {
   0% {
-    -webkit-transform: rotateY(-20deg) rotateX(-35deg) translate(-300px, 300px) skew(-35deg, 10deg);
-            transform: rotateY(-20deg) rotateX(-35deg) translate(-300px, 300px) skew(-35deg, 10deg);
+    -webkit-transform: rotateY(-20deg) rotateX(-35deg) translate(-300px, 300px)
+      skew(-35deg, 10deg);
+    transform: rotateY(-20deg) rotateX(-35deg) translate(-300px, 300px)
+      skew(-35deg, 10deg);
     opacity: 0;
   }
   100% {
     -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
-            transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
     opacity: 1;
   }
 }
 @keyframes tilt-in-fwd-bl {
   0% {
-    -webkit-transform: rotateY(-20deg) rotateX(-35deg) translate(-300px, 300px) skew(-35deg, 10deg);
-            transform: rotateY(-20deg) rotateX(-35deg) translate(-300px, 300px) skew(-35deg, 10deg);
+    -webkit-transform: rotateY(-20deg) rotateX(-35deg) translate(-300px, 300px)
+      skew(-35deg, 10deg);
+    transform: rotateY(-20deg) rotateX(-35deg) translate(-300px, 300px)
+      skew(-35deg, 10deg);
     opacity: 0;
   }
   100% {
     -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
-            transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+    transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
     opacity: 1;
   }
 }
 .slide-out-blurred-bl {
-	-webkit-animation: slide-out-blurred-bl 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
-	        animation: slide-out-blurred-bl 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
+  -webkit-animation: slide-out-blurred-bl 0.45s
+    cubic-bezier(0.755, 0.05, 0.855, 0.06) both;
+  animation: slide-out-blurred-bl 0.45s cubic-bezier(0.755, 0.05, 0.855, 0.06)
+    both;
 }
 
 /* ----------------------------------------------
@@ -554,46 +513,44 @@ a:hover {
  * animation slide-out-blurred-bl
  * ----------------------------------------
  */
- @-webkit-keyframes slide-out-blurred-bl {
+@-webkit-keyframes slide-out-blurred-bl {
   0% {
     -webkit-transform: translate(0, 0) skew(0deg, 0deg);
-            transform: translate(0, 0) skew(0deg, 0deg);
+    transform: translate(0, 0) skew(0deg, 0deg);
     -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
     -webkit-filter: blur(0);
-            filter: blur(0);
+    filter: blur(0);
     opacity: 1;
   }
   100% {
     -webkit-transform: translate(-1000px, 1000px) skew(-80deg, -10deg);
-            transform: translate(-1000px, 1000px) skew(-80deg, -10deg);
+    transform: translate(-1000px, 1000px) skew(-80deg, -10deg);
     -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
     -webkit-filter: blur(40px);
-            filter: blur(40px);
+    filter: blur(40px);
     opacity: 0;
   }
 }
 @keyframes slide-out-blurred-bl {
   0% {
     -webkit-transform: translate(0, 0) skew(0deg, 0deg);
-            transform: translate(0, 0) skew(0deg, 0deg);
+    transform: translate(0, 0) skew(0deg, 0deg);
     -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
     -webkit-filter: blur(0);
-            filter: blur(0);
+    filter: blur(0);
     opacity: 1;
   }
   100% {
     -webkit-transform: translate(-1000px, 1000px) skew(-80deg, -10deg);
-            transform: translate(-1000px, 1000px) skew(-80deg, -10deg);
+    transform: translate(-1000px, 1000px) skew(-80deg, -10deg);
     -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
     -webkit-filter: blur(40px);
-            filter: blur(40px);
+    filter: blur(40px);
     opacity: 0;
   }
 }
-
-
 </style>
