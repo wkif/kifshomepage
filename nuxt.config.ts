@@ -62,7 +62,7 @@ export default defineNuxtConfig({
           "background-position": "center",
           "background-size": "100%",
           "background-repeat": "no-repeat",
-          filter: "brightness(80%)",
+          "filter": "brightness(80%)",
         },
       ],
       [

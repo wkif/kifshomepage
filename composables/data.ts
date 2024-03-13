@@ -19,6 +19,13 @@ const data: WebType[] = [
         home: "https://excalidraw.com/"
       },
       {
+        id: 20,
+        name: "snippet-generator",
+        desc: "一个生成vscode用户代码片段的工具",
+        tags: ["vscode", "在线工具"],
+        home: "https://creative-gumdrop-c9becc.netlify.app/"
+      },
+      {
         id: 15,
         name: "Chat GPT",
         desc: "Chat GPT",
